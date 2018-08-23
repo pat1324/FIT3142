@@ -68,35 +68,55 @@ int main()
 			 break;
 		 }//one at a time, now just checking if clients work with no safety measures
 		 //wait?
+
 	 }
 
 	 switch (client){
 		case 0:
+			while (mydata->mylock != 0){
+				pause();
+			}
+			// if (mydata->mylock == 0){
+			// 	printf("client 1 on\n");
+			// 	mydata->mylock = 1;
+			// 	mydata->present |= CLIENT_1; //1010 | 0001 = 1011 (11)
+			// 	mydata->exit &= ~(CLIENT_1);
+			// 	mydata->mylock = 0;
+			// }
 			printf("client 1 on\n");
 			mydata->mylock = 1;
 			mydata->present |= CLIENT_1; //1010 | 0001 = 1011 (11)
-			mydata->exit ^= CLIENT_1;//might be wrong as well
+			mydata->exit &= ~(CLIENT_1);
 			mydata->mylock = 0;
 			break;
 		case 1:
+			while (mydata->mylock != 0){
+				pause();
+			}
 			printf("client 2 on\n");
 			mydata->mylock = 1;
 			mydata->present |= CLIENT_2;
-			mydata->exit ^= CLIENT_2;
+			mydata->exit &= ~(CLIENT_2);
 			mydata->mylock = 0;
 			break;
 		case 2:
+			while (mydata->mylock != 0){
+				pause();
+			}
 			printf("client 3 on\n");
 			mydata->mylock = 1;
 			mydata->present |= CLIENT_3;
-			mydata->exit ^= CLIENT_3;
+			mydata->exit &= ~(CLIENT_3);
 			mydata->mylock = 0;
 			break;
 		case 3:
+			while (mydata->mylock != 0){
+				pause();
+			}
 			printf("client 4 on\n");
 			mydata->mylock = 1;
 			mydata->present |= CLIENT_4;
-			mydata->exit ^= CLIENT_4;
+			mydata->exit &= ~(CLIENT_4);
 			mydata->mylock = 0;
 			break;
 		default:
@@ -109,29 +129,31 @@ int main()
 		 printf("enter code: ");
 		 scanf("%d", &z);
 		 if (z == 0){
-			 printf("test code\n");
-			 //read functionality:
-			 // printf("RPM = %d\n", mydata->rpm);
-			 // printf("Crank Angle = %d\n", mydata->crankangle);
-			 // printf("Throttle Setting = %d\n", mydata->throttle);
-			 // printf("Fuel Flow = %d\n", mydata->fuelflow);
-			 // printf("Engine Temp = %d\n", mydata->temp);
-			 // printf("Fan Speed = %d\n", mydata->fanspeed);
-			 // printf("Oil Pressure = %d\n", mydata->oilpres);
-			 // printf("\n");
+			 printf("RPM = %d\n", mydata->rpm);
+			 printf("Crank Angle = %d\n", mydata->crankangle);
+			 printf("Throttle Setting = %d\n", mydata->throttle);
+			 printf("Fuel Flow = %d\n", mydata->fuelflow);
+			 printf("Engine Temp = %d\n", mydata->temp);
+			 printf("Fan Speed = %d\n", mydata->fanspeed);
+			 printf("Oil Pressure = %d\n", mydata->oilpres);
+			 printf("\n");
 		 }
 		 if (z == 1){
 			 switch (client){
 				case 0:
+					while (mydata->mylock != 0){
+						pause();
+					}
 					printf("client 1 off\n");
-					//lock
 					mydata->mylock = 1;
 					mydata->present ^= CLIENT_1;
 					mydata->exit |= CLIENT_1;
 					mydata->mylock = 0;
-					//unlock
 					break;
 				case 1:
+					while (mydata->mylock != 0){
+						pause();
+					}
 					printf("client 2 off\n");
 					mydata->mylock = 1;
 					mydata->present ^= CLIENT_2;
@@ -139,6 +161,9 @@ int main()
 					mydata->mylock = 0;
 					break;
 				case 2:
+					while (mydata->mylock != 0){
+						pause();
+					}
 					printf("client 3 off\n");
 					mydata->mylock = 1;
 					mydata->present ^= CLIENT_3;
@@ -146,6 +171,9 @@ int main()
 					mydata->mylock = 0;
 					break;
 				case 3:
+					while (mydata->mylock != 0){
+						pause();
+					}
 					printf("client 4 off\n");
 					mydata->mylock = 1;
 					mydata->present ^= CLIENT_4;
