@@ -66,9 +66,7 @@ int main()
 			 client = i;
 			 printf("client: %d\n", client);
 			 break;
-		 }//one at a time, now just checking if clients work with no safety measures
-		 //wait?
-
+		 }
 	 }
 
 	 switch (client){
@@ -76,13 +74,6 @@ int main()
 			while (mydata->mylock != 0){
 				pause();
 			}
-			// if (mydata->mylock == 0){
-			// 	printf("client 1 on\n");
-			// 	mydata->mylock = 1;
-			// 	mydata->present |= CLIENT_1; //1010 | 0001 = 1011 (11)
-			// 	mydata->exit &= ~(CLIENT_1);
-			// 	mydata->mylock = 0;
-			// }
 			printf("client 1 on\n");
 			mydata->mylock = 1;
 			mydata->present |= CLIENT_1; //1010 | 0001 = 1011 (11)
@@ -184,7 +175,7 @@ int main()
 					printf("not yet tested\n");
 				}
 		 }
-	 }//server is exiting when all 4 clients switch on
+	 }
 
 	/*
 	 * We must now unmap the segment into our process address space using the
