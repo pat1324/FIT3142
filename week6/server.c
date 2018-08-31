@@ -50,7 +50,7 @@ int main(void){
     //bzero(buffer, 256);//refresh buffer
     n = read(newsock, buffer, 256);//read from new socket
     if (n <= 0){
-      fprintf(stderr, "client disconnected\n");
+      printf("client disconnected\n");
       close(newsock);
       close(sock);
       return 0;
